@@ -1,25 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+import { PureComponent } from 'react';
+import './App.scss';
+import { connect } from "react-redux";
+import { testReducer } from './store/mainSlice';
+import Navbar from './components/Navbar.jsx'
+import { BrowserRouter } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends PureComponent {
+
+  render() {
+    return (
+      <BrowserRouter>
+      <div className="App">
+        <Navbar/>
+        {/* <button onClick={() => this.props.testReducer()}>Press me</button>
+        <p>{this.props.test}</p> */}
+      </div>
+      </BrowserRouter>
+    )
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  test: state.redux.test
+});
+
+const mapDispatchToProps = { testReducer };
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+// query test{
+// 	categories{
+//     name
+//     products{
+//       id
+//       name
+//       inStock
+//       gallery
+//       description
+//       category
+//       attributes{
+//         id
+//         name
+//         type
+//         items{
+//           displayValue
+//           value
+//           id
+//         }
+//       }
+//       prices{
+//         currency{
+//           label
+//           symbol
+          
+//         }
+//         amount
+//       }
+//       brand
+//     }
+//   }
+// }
