@@ -3,19 +3,19 @@ import './App.scss';
 import { connect } from "react-redux";
 import { testReducer } from './store/mainSlice';
 import Navbar from './components/Navbar.jsx'
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ItemList from './components/ItemList';
 
 class App extends PureComponent {
 
   render() {
     return (
-      <BrowserRouter>
       <div className="App">
         <Navbar/>
+        <ItemList/>
         {/* <button onClick={() => this.props.testReducer()}>Press me</button>
         <p>{this.props.test}</p> */}
       </div>
-      </BrowserRouter>
     )
   }
 }

@@ -1,6 +1,6 @@
 @import 'resets';
 
-$contentWidth: 1440px;
+$contentWidth: 1240px;
 
 .navbar {
     width: 100%;
@@ -45,6 +45,68 @@ $contentWidth: 1440px;
         .Currency_CartLogo {
             display: flex;
             justify-content: flex-end;
+
+            svg {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.item_list {
+    width: $contentWidth;
+    margin-left: auto;
+    margin-right: auto;
+
+
+    .item_cards {
+        height: fit-content;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+        padding: 0 15px;
+
+        a:nth-child(3) {
+            div:nth-child(1) {
+                background-position: bottom !important;
+            }
+        }
+
+        a {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+
+            .item_card_photo {
+                background-position: center !important;
+                background-size: cover !important;
+                background-repeat: no-repeat !important;
+                width: 100%;
+                height: 355px;
+            }
+
+            .item_card_info {
+                margin-top: 25px;
+
+                div:nth-child(1) {
+                    font-weight: 300;
+                    font-size: 18px;
+                    color: #1D1F22;
+                }
+
+                div:nth-child(2) {
+                    font-weight: 500;
+                    font-size: 18px;
+                    color: #1D1F22;
+                    margin-top: 10px;
+                }
+            }
+        }
+
+        a:hover {
+            box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+            transform: scale(1.03);
         }
     }
 }
@@ -54,5 +116,9 @@ $contentWidth: 1440px;
         &_2 {
             width: 100%;
         }
+    }
+
+    .item_list {
+        width: 100%;
     }
 }

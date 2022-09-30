@@ -20,8 +20,8 @@ class Navbar extends PureComponent {
                         const category = data.categories;
 
                         return <div className='navbar_2'>
-                            <div className='nav_links'>{category.map((item, index) => <Link key={index} to={`/${item.name}`}>{item.name.toUpperCase()}</Link>)}</div>
-                            <div className='homeLogo'><Link to={`/`}><HomeLogo /></Link></div>
+                            <div className='nav_links'>{category.map((item, index) => <a key={index} href={`/${item.name}`}>{item.name.toUpperCase()}</a>)}</div>
+                            <div className='homeLogo'><a href={`/`}><HomeLogo /></a></div>
                             <div className='Currency_CartLogo'>
                                 <div><EmptyCart /></div>
                             </div>
