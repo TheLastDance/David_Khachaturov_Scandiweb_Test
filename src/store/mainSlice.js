@@ -5,15 +5,20 @@ const mainSlice = createSlice({
     initialState: {
         cartList: [],
         test: 1,
+        currency: '$',
     },
     reducers: {
         testReducer(state) {
             state.test++;
+        },
+
+        changeCurrency(state, action) {
+            state.currency = action.payload;
         }
     }
 });
 
 
-export const { testReducer } = mainSlice.actions;
+export const { testReducer, changeCurrency } = mainSlice.actions;
 
 export default mainSlice;

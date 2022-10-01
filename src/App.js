@@ -9,6 +9,7 @@ import ItemList from './components/ItemList';
 class App extends PureComponent {
 
   render() {
+    //тут надо будет писать стейт для смены курса чтобы нормально передать обоим элементам в виде пропса или можно прописать в редуксе(лучше в редуксе)
     return (
       <div className="App">
         <Navbar/>

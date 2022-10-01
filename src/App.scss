@@ -46,6 +46,62 @@ $contentWidth: 1240px;
             display: flex;
             justify-content: flex-end;
 
+            .Currency {
+                display: flex;
+                justify-content: flex-end;
+
+                &_2 {
+                    display: flex;
+
+                    .select_currency {
+                        display: flex;
+                        align-items: center;
+                        margin-right: 22px;
+                        cursor: pointer;
+
+                        p {
+                            font-weight: 500;
+                            font-size: 18px;
+                            color: #1D1F22;
+                            margin-right: 10px;
+                        }
+
+                        svg {
+                            height: 3px;
+                            width: 6px;
+                        }
+                    }
+                }
+
+                .drop_down_currencies {
+                    position: absolute;
+                    width: fit-content;
+                    margin-top: 28px;
+                    margin-right: -24px;
+                    font-weight: 500;
+                    font-size: 18px;
+                    color: #1D1F22;
+
+                    .currencies_list {
+                        cursor: pointer;
+                        padding: 8px;
+                    }
+
+                    .currencies_list:hover {
+                        background: #EEEEEE;
+                    }
+                }
+            }
+
+            .cart {
+
+                svg {
+                    width: 20px;
+                    height: 20px;
+                    margin-top: 4px;
+                }
+            }
+
             svg {
                 cursor: pointer;
             }
@@ -55,8 +111,7 @@ $contentWidth: 1240px;
 
 .item_list {
     width: $contentWidth;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 70px auto;
 
 
     .item_cards {
@@ -65,6 +120,7 @@ $contentWidth: 1240px;
         grid-template-columns: repeat(3, 1fr);
         gap: 40px;
         padding: 0 15px;
+        margin-top: 70px;
 
         a:nth-child(3) {
             div:nth-child(1) {

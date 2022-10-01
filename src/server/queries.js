@@ -28,3 +28,11 @@ query category {
     }
 }
 `
+
+export const CURRENCY = gql`
+query currency {
+    currencies{
+        label
+        symbol
+    }	
+}`
