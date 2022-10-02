@@ -1,5 +1,6 @@
 import { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { ReactComponent as EmptyCart } from '../svg_folder/Empty Cart.svg';
 
 
 class ItemCard extends PureComponent {
@@ -17,6 +18,7 @@ class ItemCard extends PureComponent {
                         <p>{`${moneyFilter.currency.symbol}${moneyFilter.amount}`}</p>
                     </div>
                 </div>
+                <div onClick={(e) => e.preventDefault()} className='item_cart'><EmptyCart /></div>
             </a>
         )
     }

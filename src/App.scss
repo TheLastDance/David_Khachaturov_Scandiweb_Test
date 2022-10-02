@@ -2,11 +2,13 @@
 
 $contentWidth: 1240px;
 
+
 .navbar {
     width: 100%;
     height: 80px;
     margin-left: auto;
     margin-right: auto;
+    background: #FFFFFF;
 
     &_2 {
         width: $contentWidth;
@@ -24,7 +26,7 @@ $contentWidth: 1240px;
                 font-size: 16px;
                 padding-left: 10px;
                 padding-right: 10px;
-                padding-bottom: 30px;
+                padding-bottom: 27px;
                 text-decoration: none;
                 color: #1D1F22;
                 border-bottom: 2px solid #FFFFFF;
@@ -94,6 +96,69 @@ $contentWidth: 1240px;
             }
 
             .cart {
+                .cart_overlay {
+                    position: absolute;
+                    width: 325px;
+                    height: fit-content;
+                    padding: 16px;
+                    margin-left: -300px;
+                    margin-top: 26px;
+                    background: #FFFFFF;
+
+                    .total_amount {
+                        display: flex;
+                        justify-content: space-between;
+                        margin: 32px 0;
+
+                        p {
+                            font-weight: 500;
+                            font-size: 16px;
+                        }
+                    }
+
+                    .cart_buttons {
+                        user-select: none;
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 12px;
+
+                        button:nth-child(1) {
+                            background: #FFFFFF;
+                            border: 1px solid #1D1F22;
+                            color: #1D1F22;
+                            font-weight: 600;
+                            font-size: 14px;
+                            user-select: none;
+                            padding: 13px;
+                            cursor: pointer;
+                            transition: ease-in 0.4s;
+                        }
+
+                        button:nth-child(2) {
+                            font-weight: 600;
+                            font-size: 14px;
+                            background: #5ECE7B;
+                            border: 1px solid #5ECE7B;
+                            color: #FFFFFF;
+                            user-select: none;
+                            border: none;
+                            cursor: pointer;
+                            transition: ease-in 0.4s;
+                        }
+
+                        button:nth-child(1):hover {
+                            border: 1px solid #5ECE7B;
+                            background: #5ECE7B;
+                            color: #FFFFFF;
+                        }
+
+                        button:nth-child(2):hover {
+                            background: #FFFFFF;
+                            border: 1px solid #1D1F22;
+                            color: #1D1F22;
+                        }
+                    }
+                }
 
                 svg {
                     width: 20px;
@@ -128,11 +193,37 @@ $contentWidth: 1240px;
             }
         }
 
+        a:hover {
+            .item_cart {
+                display: flex;
+            }
+        }
+
+        // to show cart icon on hover
+
         a {
             padding: 16px;
             display: flex;
             flex-direction: column;
             text-decoration: none;
+            position: relative;
+
+            .item_cart {
+                position: absolute;
+                right: 31px;
+                bottom: 72px;
+                display: none;
+                width: 52px;
+                height: 52px;
+                background: #5ECE7B;
+                border-radius: 50%;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .item_cart:hover {
+                filter: brightness(0.9)
+            }
 
             .item_card_photo {
                 background-position: center !important;
@@ -163,6 +254,7 @@ $contentWidth: 1240px;
         a:hover {
             box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
             transform: scale(1.03);
+            background: #FFFFFF;
         }
     }
 }

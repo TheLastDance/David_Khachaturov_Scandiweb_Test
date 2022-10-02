@@ -3,8 +3,6 @@ import { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { CURRENCY } from '../server/queries';
 import { changeCurrency } from '../store/mainSlice';
-import { ReactComponent as DropDown } from '../svg_folder/drop_down.svg';
-import { ReactComponent as DropUp } from '../svg_folder/drop_up.svg';
 import React from 'react';
 
 
@@ -13,8 +11,9 @@ class SelectCurrency extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            toggleCurrency: false, //сделать в редуксе
+            toggleCurrency: false,
         };
+        this.box = React.createRef();
     }
 
     changeCurrency = (symbol) => {
@@ -22,7 +21,16 @@ class SelectCurrency extends PureComponent {
         this.setState(prev => ({
             toggleCurrency: !prev.toggleCurrency
         }));
+    }//this function will change currency and prices of items depending on chosen currency symbol. Currency symbol state from redux will be saved in localstorage 
+
+    componentDidMount() {
+        document.addEventListener('click', this.handleOutsideClick);
     }
+    handleOutsideClick = (event) => {
+        if (this.box && !this.box.current.contains(event.target) && this.state.toggleCurrency) {
+            this.setState({ toggleCurrency: false });
+        }
+    } // this function with ref will detect click outside of our box.(currency switcher)
 
     render() {
         return (
@@ -32,14 +40,17 @@ class SelectCurrency extends PureComponent {
                     if (error) return console.log(error);
 
                     const currency = data.currencies;
-                    console.log(this.props.currencySymbol)
-                    console.log(this.state.toggleCurrency)
 
-                    return <div className='Currency'>
+                    return <div ref={this.box} className='Currency'>
                         <div className='Currency_2'>
                             <div className='select_currency' onClick={() => this.setState(prev => ({ toggleCurrency: !prev.toggleCurrency }))}>
                                 <p>{this.props.currencySymbol}</p>
-                                {!this.state.toggleCurrency ? <DropDown /> : <DropUp />}
+                                {!this.state.toggleCurrency ? <svg viewBox="0 0 8 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 0.5L4 3.5L7 0.5" stroke="black" />
+                                </svg> : <svg viewBox="0 0 8 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 3.5L4 0.5L7 3.5" stroke="black" />
+                                </svg> // toggling icons
+                                }
                             </div>
                         </div>
                         <div className='drop_down_currencies' style={!this.state.toggleCurrency ? { display: 'none' } : { display: 'block' }}>
@@ -55,7 +66,7 @@ class SelectCurrency extends PureComponent {
 
 const mapStateToProps = (state) => ({
     currencySymbol: state.redux.currency
-});
+}); // importing state from redux
 
 const mapDispatchToProps = { changeCurrency };
 

@@ -4,16 +4,20 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import store from './store'
+import store, { persistor } from './store'
 import { ApolloProvider } from '@apollo/client';
 import client from './server/apollo-client';
+import { PersistGate } from 'redux-persist/integration/react';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <Provider store={store}>
-        <App />
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
       </Provider>
     </ApolloProvider>
   </React.StrictMode>
