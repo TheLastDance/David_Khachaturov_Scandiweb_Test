@@ -36,3 +36,32 @@ query currency {
         symbol
     }	
 }`
+
+export const DETAILED = gql`
+query category {
+    category {
+        products {
+            id
+            brand
+            name
+            inStock
+            gallery
+            attributes {
+                name
+                type
+                items {
+                    displayValue
+                    value
+                    id
+                }
+            }
+            prices {
+                currency {
+                symbol
+            }
+            amount
+            }
+            description
+        }
+    }
+}`

@@ -56,16 +56,17 @@ class Navbar extends PureComponent {
                                 <SelectCurrency />
                                 <div className='cart' ref={this.box} onClick={() => this.setState(prev => ({ toggleCart: !prev.toggleCart }))}>
                                     <CartIcon />
-                                    {this.state.toggleCart && <div className='cart_overlay'>
-                                        <div className='total_amount'>
-                                            <div><p>Total</p></div>
-                                            <div><p>variable</p></div>
-                                        </div>
-                                        <div className='cart_buttons'>
-                                            <button>VIEW BAG</button>
-                                            <button>CHECK OUT</button>
-                                        </div>
-                                    </div>}
+                                    {this.state.toggleCart &&
+                                        <div className='cart_overlay'>
+                                            <div className='total_amount'>
+                                                <div><p>Total</p></div>
+                                                <div><p>variable</p></div>
+                                            </div>
+                                            <div className='cart_buttons'>
+                                                <button>VIEW BAG</button>
+                                                <button>CHECK OUT</button>
+                                            </div>
+                                        </div>}
                                 </div>
                             </div>
                         </div>

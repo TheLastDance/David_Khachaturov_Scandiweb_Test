@@ -5,6 +5,7 @@ import { testReducer } from './store/mainSlice';
 import Navbar from './components/Navbar.jsx'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ItemList from './components/ItemList';
+import ProductsDetails from './components/ProductsDetails';
 
 class App extends PureComponent {
 
@@ -14,6 +15,7 @@ class App extends PureComponent {
       <div className="App">
         <Navbar/>
         <ItemList/>
+        <ProductsDetails/>
         {/* <button onClick={() => this.props.testReducer()}>Press me</button>
         <p>{this.props.test}</p> */}
       </div>
