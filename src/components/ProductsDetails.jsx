@@ -54,7 +54,7 @@ class ProductsDetails extends PureComponent {
                                             </div> :
                                             <div className='text' key={index2}>
                                                 <p>{item2.name}</p>
-                                                {item2.items.map((item3, index3) => <div onClick={() => this.setState({ attr: new Array(item.attributes.length).fill(index3) })} className='text_2' key={index3} style={index3 === this.state.attr[index2] ? { background: 'black', color: 'white' } : { background: 'white', color: 'black' }}>{item3.value}</div>)}
+                                                {item2.items.map((item3, index3) => <div onClick={() => this.setState({ attr: [...this.state.attr].map((item, index) => index === index2 ? index3 : item) })} className='text_2' key={index3} style={index3 === this.state.attr[index2] ? { background: 'black', color: 'white' } : { background: 'white', color: 'black' }}>{item3.value}</div>)}
                                             </div>
                                     )}
                                 </div>
