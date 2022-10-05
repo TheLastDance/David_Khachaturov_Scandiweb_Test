@@ -16,7 +16,6 @@ class ItemList extends PureComponent {
     }
 
     render() {
-        console.log(this.state.url)
         return (
             <div className='item_list'>
                 <Query query={MAIN_CATEGORY}>
@@ -39,7 +38,6 @@ class ItemList extends PureComponent {
 
                         const product = data.category.products;
                         const mainPage = this.state.url === '' || this.state.url === 'all';
-                        console.log(product[0].gallery[0])
 
                         return <div className='item_cards'>
                             {mainPage && product.map((item, index) => <ItemCard key={index} item={item} />)}
