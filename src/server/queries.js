@@ -46,6 +46,7 @@ query category {
             name
             inStock
             gallery
+            category
             attributes {
                 name
                 type

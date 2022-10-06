@@ -1,6 +1,6 @@
 import { PureComponent } from 'react';
 import { Query } from "@apollo/client/react/components";
-import { ITEM_LIST_QUERY, MAIN_CATEGORY } from '../server/queries';
+import { DETAILED, MAIN_CATEGORY } from '../server/queries';
 import ItemCard from './ItemCard';
 
 
@@ -31,7 +31,7 @@ class ItemList extends PureComponent {
                         </div>
                     }}
                 </Query>
-                <Query query={ITEM_LIST_QUERY}>
+                <Query query={DETAILED}>
                     {({ loading, error, data }) => {
                         if (loading) return null;
                         if (error) return console.log(error);

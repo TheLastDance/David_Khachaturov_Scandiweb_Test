@@ -1,6 +1,8 @@
 import { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { addToCartFromItemList } from '../store/mainSlice';
 import { ReactComponent as EmptyCart } from '../svg_folder/Empty Cart.svg';
+
 
 
 class ItemCard extends PureComponent {
@@ -20,7 +22,7 @@ class ItemCard extends PureComponent {
                         <p>{`${moneyFilter.currency.symbol}${moneyFilter.amount}`}</p>
                     </div>
                 </div>
-                {this.props.item.inStock && <div onClick={(e) => e.preventDefault()} className='item_cart'><EmptyCart /></div>}
+                {this.props.item.inStock && <div onClick={(e) => e.preventDefault()} className='item_cart'><div onClick={() => this.props.addToCartFromItemList({ item: this.props.item })}><EmptyCart /></div></div>}
             </a>
         )
     }
@@ -30,6 +32,8 @@ const mapStateToProps = (state) => ({
     currencySymbol: state.redux.currency
 });
 
-export default connect(mapStateToProps)(ItemCard);
+const mapDispatchToProps = { addToCartFromItemList };
+
+export default connect(mapStateToProps, mapDispatchToProps)(ItemCard);
 
 
