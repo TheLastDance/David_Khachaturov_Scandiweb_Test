@@ -96,6 +96,27 @@ $contentWidth: 1240px;
             }
 
             .cart {
+                position: relative;
+                padding-right: 10px;
+
+                .total_quantity {
+                    position: absolute;
+                    width: 17px;
+                    height: 17px;
+                    z-index: 1;
+                    background: #1D1F22;
+                    border-radius: 50%;
+                    top: -3px;
+                    right: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #FFFFFF;
+                    font-size: 14px;
+                    font-weight: 600;
+                    cursor: pointer;
+                }
+
                 .cart_overlay {
                     position: absolute;
                     width: 325px;
@@ -104,6 +125,7 @@ $contentWidth: 1240px;
                     margin-left: -300px;
                     margin-top: 26px;
                     background: #FFFFFF;
+                    z-index: 1;
 
                     .total_amount {
                         display: flex;
@@ -156,6 +178,73 @@ $contentWidth: 1240px;
                             background: #FFFFFF;
                             border: 1px solid #1D1F22;
                             color: #1D1F22;
+                        }
+                    }
+
+                    &_item_info {
+                        .product_info_attributes {
+                            .swatch {
+                                margin-bottom: 24px;
+
+                                p {
+                                    font-weight: 700;
+                                    font-size: 18px;
+                                    color: #1D1F22;
+                                }
+
+                                div {
+                                    display: flex;
+                                    width: fit-content;
+                                    flex-wrap: wrap;
+
+                                    .swatch_2 {
+                                        width: 36px;
+                                        height: 36px;
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                        cursor: pointer;
+                                        margin-right: 8px;
+                                        margin-top: 8px;
+
+                                        div {
+                                            width: 32px !important;
+                                            height: 32px !important;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .text {
+
+                                margin-bottom: 24px;
+
+                                p {
+                                    font-weight: 700;
+                                    font-size: 18px;
+                                    color: #1D1F22;
+                                }
+
+                                div {
+                                    display: flex;
+                                    width: fit-content;
+                                    flex-wrap: wrap;
+
+                                    .text_2 {
+                                        width: 63px;
+                                        height: 45px;
+                                        border: 1px solid #1D1F22;
+                                        cursor: pointer;
+                                        margin-right: 12px;
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                        font-weight: 400;
+                                        font-size: 16px;
+                                        margin-top: 8px;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -442,6 +531,10 @@ $contentWidth: 1240px;
     .navbar {
         &_2 {
             width: 100%;
+
+            .cart_overlay {
+                margin-left: -295px !important;
+            }
         }
     }
 

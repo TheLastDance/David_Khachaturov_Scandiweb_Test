@@ -6,6 +6,10 @@ import { ReactComponent as HomeLogo } from '../svg_folder/homeLogo_svg.svg';
 import { ReactComponent as CartIcon } from '../svg_folder/cartIcon.svg';
 import SelectCurrency from './selectCurrency.jsx';
 import React from 'react';
+import CartOverlay from './CartOverlay.jsx';
+import { connect } from 'react-redux';
+
+
 
 
 
@@ -40,6 +44,7 @@ class Navbar extends PureComponent {
 
 
     render() {
+        console.log(this.props.totalQuantity);
         return (
             <nav id='navbar' className='navbar'>
                 <Query query={MAIN_CATEGORY}>
@@ -54,19 +59,10 @@ class Navbar extends PureComponent {
                             <div className='homeLogo'><a href={`/`}><HomeLogo /></a></div>
                             <div className='Currency_CartLogo'>
                                 <SelectCurrency />
-                                <div className='cart' ref={this.box} onClick={() => this.setState(prev => ({ toggleCart: !prev.toggleCart }))}>
-                                    <CartIcon />
-                                    {this.state.toggleCart &&
-                                        <div className='cart_overlay'>
-                                            <div className='total_amount'>
-                                                <div><p>Total</p></div>
-                                                <div><p>variable</p></div>
-                                            </div>
-                                            <div className='cart_buttons'>
-                                                <button>VIEW BAG</button>
-                                                <button>CHECK OUT</button>
-                                            </div>
-                                        </div>}
+                                <div className='cart' ref={this.box} >
+                                    <CartIcon onClick={() => this.setState(prev => ({ toggleCart: !prev.toggleCart }))} />
+                                    {this.props.totalQuantity > 0 && <div className='total_quantity' onClick={() => this.setState(prev => ({ toggleCart: !prev.toggleCart }))}>{this.props.totalQuantity}</div>}
+                                    {this.state.toggleCart && <CartOverlay />}
                                 </div>
                             </div>
                         </div>
@@ -77,4 +73,8 @@ class Navbar extends PureComponent {
     }
 }
 
-export default Navbar;
+const mapStateToProps = (state) => ({
+    totalQuantity: state.redux.totalQuantity,
+});
+
+export default connect(mapStateToProps)(Navbar);

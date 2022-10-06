@@ -2,6 +2,8 @@ import { PureComponent } from 'react';
 import { Query } from "@apollo/client/react/components";
 import { DETAILED } from '../server/queries';
 import { connect } from 'react-redux';
+import { addToCartFromDetails } from '../store/mainSlice';
+
 
 
 class ProductsDetails extends PureComponent {
@@ -22,6 +24,8 @@ class ProductsDetails extends PureComponent {
                     if (error) return console.log(error);
 
                     const product = data.category.products;
+                    console.log(this.state.attr);
+                    console.log(this.props.cartList);
 
                     return <div className='product'>
                         {product.map((item, index) => this.state.url === item.id && <div onLoad={() => this.setState({ attr: new Array(item.attributes.length).fill(0) })} key={index} className='product_2'>
@@ -46,8 +50,9 @@ class ProductsDetails extends PureComponent {
                                                     className='swatch_2'
                                                     title={item3.displayValue}
                                                     key={index3}
-                                                    style={index3 === this.state.attr[index2] ? { border: '1px solid #5ECE7B' } : {}}> <div style={{ background: item3.value }}></div> </div>)}
+                                                    style={index3 === this.state.attr[index2] ? { border: '1px solid #5ECE7B' } : {}}> <div style={{ background: item3.value, border: '1px solid grey' }}></div> </div>)}
                                                 </div>
+                                                {/* It's not in figma's design, but it's necessary to add grey border around colors, because you have option to select white color and it's the same with our body color, so user won't see it */}
                                             </div> :
                                             <div className='text' key={index2}>
                                                 <p>{`${item2.name}:`}</p>
@@ -67,7 +72,7 @@ class ProductsDetails extends PureComponent {
                                     it will change value of the same index in the state array to the index of selected color)*/}
                                 <p className='product_info_price'>PRICE:</p>
                                 <p className='product_info_amount'>{this.props.currencySymbol}{item.prices.filter(item => item.currency.symbol === this.props.currencySymbol)[0].amount}</p>
-                                {item.inStock && <button className='product_info_button'>ADD TO CART</button>}
+                                {item.inStock && <button className='product_info_button' onClick={() => this.props.addToCartFromDetails({ item, attr: this.state.attr })}>ADD TO CART</button>}
                                 <div className='product_info_description' dangerouslySetInnerHTML={{ __html: item.description }}></div>
                             </div>
                         </div>)}
@@ -79,7 +84,10 @@ class ProductsDetails extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-    currencySymbol: state.redux.currency
+    currencySymbol: state.redux.currency,
+    cartList: state.redux.cartList
 });
 
-export default connect(mapStateToProps)(ProductsDetails);
+const mapDispatchToProps = { addToCartFromDetails };
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsDetails);
