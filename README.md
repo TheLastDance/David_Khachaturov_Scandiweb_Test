@@ -8,13 +8,15 @@ Firstly you need to download/clone repository to your PC.
 
 ## Clone/download the graphQL endpoint
 
-Then you need to clone graphQL endpoint to repository with that project
+Then you need to clone graphQL endpoint to repository with that project.
+
+[Endpoint link](https://github.com/scandiweb/junior-react-endpoint)
 
 To start this endpoint, follow these steps
 
-1.Install dependencies - ### yarn install
-2.Build the project - ### yarn build
-3.Start the project - ### yarn start
+1.Install dependencies - `yarn install`
+2.Build the project - `yarn build`
+3.Start the project - `yarn start`
 
 ## Run project
 
