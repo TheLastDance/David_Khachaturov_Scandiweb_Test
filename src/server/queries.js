@@ -8,27 +8,6 @@ query MAIN_CATEGORY{
 }
 `;
 
-export const ITEM_LIST_QUERY = gql`
-query category {
-    category {
-        products {
-            id
-            brand
-            name
-            inStock
-            category
-            gallery
-            prices {
-                currency {
-                    symbol
-                }
-                amount
-            }
-        }
-    }
-}
-`
-
 export const CURRENCY = gql`
 query currency {
     currencies{

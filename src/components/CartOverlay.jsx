@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ItemsInCart from './ItemsInCart';
 
 
-
+//Cart overlay section
 class CartOverlay extends PureComponent {
 
     render() {

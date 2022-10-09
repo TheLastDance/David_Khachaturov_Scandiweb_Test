@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import { addToCartFromDetails } from '../store/mainSlice';
 
 
-
+//This part of code will make page for PDP
 class ProductsDetails extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
             url: window.location.pathname.slice(1), // current url checker
             mainPhoto: '', // state for big photo of product
-            attr: [], // there will be array of selected products attributes
+            attr: [], // there will be array of selected products attributes (their index)
         };
     }
 
@@ -46,7 +46,7 @@ class ProductsDetails extends PureComponent {
                                             <div className='swatch' key={index2}>
                                                 <p>{`${item2.name}:`}</p>
                                                 <div>{item2.items.map((item3, index3) => <div
-                                                    onClick={() => this.setState({ attr: [...this.state.attr].map((item, index) => index === index2 ? index3 : item) })}
+                                                    onClick={() => this.setState({ attr: [...this.state.attr].map((item4, index4) => index4 === index2 ? index3 : item4) })}
                                                     className='swatch_2'
                                                     title={item3.displayValue}
                                                     key={index3}
@@ -57,21 +57,23 @@ class ProductsDetails extends PureComponent {
                                             <div className='text' key={index2}>
                                                 <p>{`${item2.name}:`}</p>
                                                 <div>{item2.items.map((item3, index3) => <div
-                                                    onClick={() => this.setState({ attr: [...this.state.attr].map((item, index) => index === index2 ? index3 : item) })}
+                                                    onClick={() => this.setState({ attr: [...this.state.attr].map((item4, index4) => index4 === index2 ? index3 : item4) })}
                                                     className='text_2'
                                                     title={item3.displayValue}
                                                     key={index3}
                                                     style={index3 === this.state.attr[index2] ? { background: '#1D1F22', color: 'white' } : { background: 'white', color: '#1D1F22' }}>{item3.value}</div>)}
+                                                    {/* here I render styles according on selected attributes, so if I clicked on attribute it will change style also */}
                                                 </div>
                                             </div>
                                         )}
                                 </div>
                                 {/* here I will check if product is in stock, and if it is will render attributes. Then I will check type of attribute, and last step is rendering
-                                    clickable elements to choose attribute which we need (by default chosen attribute is first one). onClick I use function which will change my array attribute 
-                                    state depending on index of clicked attribute type(so if I clicked on attribute in first type - size, 
-                                    it will change value of the same index in the state array to the index of selected color)*/}
+                                    clickable elements to choose attribute which we need (by default chosen attribute is first one). onClick I use function which will change my 
+                                    array attribute state according on index of clicked attribute type(index2 here, so if I clicked at first attribute type - size for example, 
+                                    it will change value of first element(index 0) in the state array to the index of selected attribute, then I will modify that state array
+                                    in redux, to push more understandable selected attributes values to the cart and not just indexes)*/}
                                 <p className='product_info_price'>PRICE:</p>
-                                <p className='product_info_amount'>{this.props.currencySymbol}{item.prices.filter(item => item.currency.symbol === this.props.currencySymbol)[0].amount}</p>
+                                <p className='product_info_amount'>{this.props.currencySymbol}{item.prices.filter(item => item.currency.symbol === this.props.currencySymbol)[0].amount.toFixed(2)}</p>
                                 {item.inStock && <button className='product_info_button' onClick={() => this.props.addToCartFromDetails({ item, attr: this.state.attr })}>ADD TO CART</button>}
                                 <div className='product_info_description' dangerouslySetInnerHTML={{ __html: item.description }}></div>
                             </div>

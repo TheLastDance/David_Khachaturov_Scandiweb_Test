@@ -15,7 +15,7 @@ root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
+        <PersistGate loading={null} persistor={persistor}> {/* redux persist library to save all redux states in local storage */}
           <App />
         </PersistGate>
       </Provider>

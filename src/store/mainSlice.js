@@ -3,19 +3,16 @@ import { createSlice } from '@reduxjs/toolkit';
 const mainSlice = createSlice({
     name: 'redux',
     initialState: {
-        cartList: [],
-        test: 1,
-        currency: '$',
-        totalQuantity: 0,
-        totalPriceAll: 0,
-        deleted: 5,
+        cartList: [], //our cart array
+        currency: '$', //selected currency symbol
+        totalQuantity: 0, //total quantity of all products
+        totalPriceAll: 0, //total price of all products
+        deleted: 0, //deleted index of item from cart
     },
     reducers: {
-        testReducer(state) {
-            state.test++;
-        },
 
         changeCurrency(state, action) {
+            //this function will change currency
             state.currency = action.payload; // our state will get the value of the selected currency symbol
             state.cartList = state.cartList.map(item => ({ ...item, itemPrice: item.prices.filter(item => item.currency.symbol === state.currency)[0].amount })) // will change products price depending on new currency
             state.cartList = state.cartList.map(item => ({ ...item, totalPrice: (Math.round(item.itemPrice * item.quantity * 100) / 100) })) //price of all the same products in cart depending on new currency
@@ -24,9 +21,11 @@ const mainSlice = createSlice({
         },
 
         addToCartFromDetails(state, action) {
+            //this function will add product to cart from PDP
             const attr = action.payload.attr;
             const product = action.payload.item;
             const selectedAttributes = [...attr].map((item, index) => ({ name: product.attributes[index].name, id: product.attributes[index].items[item].id }));
+            //modify an array of selected attributes to make more understandable form for other developers.
             const existId = state.cartList.find(item => item.id === product.id && JSON.stringify(item.selectedAttributes) === JSON.stringify(selectedAttributes));
             // here I decided to use JSON.stringify method to compare arrays, because we aren't allowed to use many libraries.
             // I dont need here types of my object-keys values, also my objects in the array are always in the same order, so I think this is not as bad solution.
@@ -79,16 +78,15 @@ const mainSlice = createSlice({
 
             if (existId.quantity === 1) {
                 state.deleted = state.cartList.indexOf(existId);//defines index of item which was deleted. Needed for sliders functions in react.
-                state.deletedIndex = 1;
                 state.cartList = state.cartList.slice(0, state.cartList.indexOf(existId)).concat(state.cartList.slice(state.cartList.indexOf(existId) + 1, state.cartList.length));
                 //here I will just copy my cart array without existId product
                 state.totalQuantity--;
-                state.totalPriceAll = (Math.round((state.totalPriceAll - existId.itemPrice) * 100) / 100).toFixed(2);
+                state.totalPriceAll = (Math.round((Number(state.totalPriceAll) - existId.itemPrice) * 100) / 100).toFixed(2);
             } else {
                 existId.quantity--;
                 existId.totalPrice = (Math.round((existId.totalPrice - existId.itemPrice) * 100) / 100);
                 state.totalQuantity--;
-                state.totalPriceAll = (Math.round((state.totalPriceAll - existId.itemPrice) * 100) / 100).toFixed(2);
+                state.totalPriceAll = (Math.round((Number(state.totalPriceAll) - existId.itemPrice) * 100) / 100).toFixed(2);
             }
         },
 

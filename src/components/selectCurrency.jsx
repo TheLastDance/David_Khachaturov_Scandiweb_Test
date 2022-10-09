@@ -3,6 +3,7 @@ import { PureComponent } from 'react';
 import { CURRENCY } from '../server/queries';
 import React from 'react';
 
+//Select currency section from navbar
 class SelectCurrency extends PureComponent {
     render() {
         return (
@@ -25,9 +26,10 @@ class SelectCurrency extends PureComponent {
                                 }
                             </div>
                         </div>
-                        <div className='drop_down_currencies' style={!this.props.toggleCurrency ? { display: 'none' } : { display: 'block' }}>
+                        {this.props.toggleCurrency && <div className='drop_down_currencies'>
                             {currency.map((item, index) => <div className='currencies_list' key={index} onClick={() => this.props.changeCurrency(item.symbol)}> <p>{item.symbol} {item.label}</p> </div>)}
-                        </div>
+                            {/* render all avalaible currencies from query */}
+                        </div>}
                     </div>
                 }
                 }

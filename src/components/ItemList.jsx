@@ -3,15 +3,12 @@ import { Query } from "@apollo/client/react/components";
 import { DETAILED, MAIN_CATEGORY } from '../server/queries';
 import ItemCard from './ItemCard';
 
-
-// import { Link } from "react-router-dom";
-
-
+//This part of code will make pages for PLP, according on selected category
 class ItemList extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            url: window.location.pathname.slice(1),
+            url: window.location.pathname.slice(1), //current path
         };
     }
 
@@ -28,6 +25,7 @@ class ItemList extends PureComponent {
                         return <div className='category_name'>
                             {this.state.url === '' && <h1>All</h1>}
                             {category.map((item, index) => this.state.url === item.name && <h1 key={index} style={{ textTransform: 'capitalize' }}>{item.name}</h1>)}
+                            {/* render heading of category */}
                         </div>
                     }}
                 </Query>
@@ -40,8 +38,9 @@ class ItemList extends PureComponent {
                         const mainPage = this.state.url === '' || this.state.url === 'all';
 
                         return <div className='item_cards'>
-                            {mainPage && product.map((item, index) => <ItemCard key={index} item={item} />)}
+                            {mainPage && product.map((item, index) => <ItemCard key={index} item={item} />)} {/* render all products */}
                             {product.filter(item => item.category === this.state.url).map((item, index) => <ItemCard key={index} item={item} />)}
+                            {/* filter products according on selected category */}
                         </div>
                     }}
                 </Query>

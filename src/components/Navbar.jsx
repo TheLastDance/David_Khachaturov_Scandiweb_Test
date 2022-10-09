@@ -1,7 +1,6 @@
 import { PureComponent } from 'react';
 import { Query } from "@apollo/client/react/components";
 import { MAIN_CATEGORY } from '../server/queries';
-import { Link } from "react-router-dom";
 import { ReactComponent as HomeLogo } from '../svg_folder/homeLogo_svg.svg';
 import { ReactComponent as CartIcon } from '../svg_folder/cartIcon.svg';
 import SelectCurrency from './selectCurrency.jsx';
@@ -11,10 +10,7 @@ import { connect } from 'react-redux';
 import { changeCurrency } from '../store/mainSlice';
 
 
-
-
-
-
+//Navbar section
 class Navbar extends PureComponent {
     constructor(props) {
         super(props);
@@ -22,15 +18,15 @@ class Navbar extends PureComponent {
             toggleCart: false,
             toggleCurrency: false,
         };
-        this.box = React.createRef();
+        this.box = React.createRef(); //for outside click
     }
 
     changeCurrency = (symbol) => {
-        this.props.changeCurrency(symbol);
+        this.props.changeCurrency(symbol); // comes from redux
         this.setState(prev => ({
             toggleCurrency: !prev.toggleCurrency
         }));
-    }//this function will change currency and prices of items depending on chosen currency symbol. Currency symbol state from redux will be saved in localstorage 
+    } //this function will change currency and prices of items depending on chosen currency symbol. Currency symbol state from redux will be saved in localstorage 
 
 
     toggling = () => {
@@ -38,7 +34,7 @@ class Navbar extends PureComponent {
             toggleCurrency: !prev.toggleCurrency,
             toggleCart: false,
         }));
-    }
+    } //will toggle currency menu and close cart overlay if we clicked on currency menu
 
 
     componentDidMount() {
@@ -62,9 +58,7 @@ class Navbar extends PureComponent {
         }
     }// grey body color on cart click
 
-
     render() {
-        console.log(this.props.totalQuantity);
         return (
             <nav id='navbar' className='navbar'>
                 <Query query={MAIN_CATEGORY}>

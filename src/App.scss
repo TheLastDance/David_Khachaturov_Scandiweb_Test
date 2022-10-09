@@ -1,7 +1,18 @@
-@import 'resets';
+@import 'resets', 'fonts';
 
 $contentWidth: 1240px;
 
+:root {
+    --first: 0%; //for slider animation
+    --second: 0%; //for slider animation
+}
+
+@mixin font($family, $size, $color, $fontWeight) {
+    font-family: $family;
+    font-size: $size;
+    font-weight: $fontWeight;
+    color: $color;
+}
 
 .navbar {
     width: 100%;
@@ -22,19 +33,18 @@ $contentWidth: 1240px;
         .nav_links {
 
             a {
-                font-weight: 400;
-                font-size: 16px;
+                @include font ('Raleway', 16px, #1D1F22, 400);
                 padding-left: 10px;
                 padding-right: 10px;
                 padding-bottom: 27px;
                 text-decoration: none;
-                color: #1D1F22;
                 border-bottom: 2px solid #FFFFFF;
             }
 
             a:hover {
                 color: #5ECE7B;
                 border-bottom: 2px solid #5ECE7B;
+                font-weight: 600;
             }
         }
 
@@ -47,6 +57,7 @@ $contentWidth: 1240px;
         .Currency_CartLogo {
             display: flex;
             justify-content: flex-end;
+            margin-right: 4px;
 
             .Currency {
                 display: flex;
@@ -62,9 +73,7 @@ $contentWidth: 1240px;
                         cursor: pointer;
 
                         p {
-                            font-weight: 500;
-                            font-size: 18px;
-                            color: #1D1F22;
+                            @include font ('Raleway', 18px, #1D1F22, 500);
                             margin-right: 10px;
                         }
 
@@ -80,9 +89,8 @@ $contentWidth: 1240px;
                     width: fit-content;
                     margin-top: 28px;
                     margin-right: -24px;
-                    font-weight: 500;
-                    font-size: 18px;
-                    color: #1D1F22;
+                    @include font ('Raleway', 18px, #1D1F22, 500);
+                    line-height: 160%;
 
                     .currencies_list {
                         cursor: pointer;
@@ -97,23 +105,21 @@ $contentWidth: 1240px;
 
             .cart {
                 position: relative;
-                padding-right: 10px;
+                right: 12px;
 
                 .total_quantity {
                     position: absolute;
-                    width: 17px;
-                    height: 17px;
+                    width: 20px;
+                    height: 20px;
                     z-index: 1;
                     background: #1D1F22;
                     border-radius: 50%;
-                    top: -3px;
-                    right: 0;
+                    top: -4px;
+                    right: -12px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    color: #FFFFFF;
-                    font-size: 14px;
-                    font-weight: 600;
+                    @include font ('Roboto', 14px, #FFFFFF, 700);
                     cursor: pointer;
                 }
 
@@ -155,10 +161,10 @@ $contentWidth: 1240px;
 
                     .total_items {
                         margin-bottom: 32px;
-                        font-weight: 500;
+                        @include font ('Raleway', 16px, #1D1F22, 500);
+
 
                         span {
-                            font-size: 16px;
                             font-weight: 700;
                         }
                     }
@@ -168,9 +174,12 @@ $contentWidth: 1240px;
                         justify-content: space-between;
                         margin: 32px 0;
 
-                        p {
-                            font-weight: 500;
-                            font-size: 16px;
+                        div:nth-child(1) p {
+                            @include font ('Roboto', 16px, #1D1F22, 600);
+                        }
+
+                        div:nth-child(2) p {
+                            @include font ('Raleway', 16px, #1D1F22, 700);
                         }
                     }
 
@@ -183,9 +192,7 @@ $contentWidth: 1240px;
                         a:nth-child(1) {
                             background: #FFFFFF;
                             border: 1px solid #1D1F22;
-                            color: #1D1F22;
-                            font-weight: 600;
-                            font-size: 14px;
+                            @include font ('Raleway', 14px, #1D1F22, 600);
                             cursor: pointer;
                             transition: ease-in 0.4s;
                             text-decoration: none;
@@ -195,11 +202,9 @@ $contentWidth: 1240px;
                         }
 
                         button:nth-child(2) {
-                            font-weight: 600;
-                            font-size: 14px;
+                            @include font ('Raleway', 14px, #FFFFFF, 600);
                             background: #5ECE7B;
                             border: 1px solid #5ECE7B;
-                            color: #FFFFFF;
                             border: none;
                             cursor: pointer;
                             transition: ease-in 0.4s;
@@ -231,37 +236,26 @@ $contentWidth: 1240px;
 
 
                             .product_info_brand,
-                            .product_info_name,
-                            .product_info_price {
-                                font-weight: 300;
-                                font-size: 16px;
-                                color: #1D1F22;
-                                margin-bottom: 7px;
+                            .product_info_name {
+                                @include font ('Raleway', 16px, #1D1F22, 300);
+                                margin-bottom: 5px;
                                 text-decoration: none;
                                 width: fit-content;
                             }
 
                             .product_info_price {
-                                margin-bottom: 0px;
-                            }
-
-                            .product_info_price {
-                                font-weight: 500;
+                                @include font ('Raleway', 16px, #1D1F22, 600);
+                                margin-top: 5px;
+                                margin-bottom: 10px;
+                                width: fit-content;
                             }
 
                             .product_info_attributes {
-                                font-weight: 400;
-                                font-size: 14px;
+                                @include font ('Raleway', 14px, #1D1F22, 400);
 
                                 .swatch {
-                                    margin-top: 5px;
+                                    margin-top: 8px;
                                     margin-bottom: 0;
-
-                                    p {
-                                        font-weight: 400;
-                                        font-size: 14px;
-                                        color: #1D1F22;
-                                    }
 
                                     .swatch_2 {
                                         width: 20px;
@@ -277,21 +271,14 @@ $contentWidth: 1240px;
 
 
                                 .text {
-                                    margin-top: 5px;
+                                    margin-top: 8px;
                                     margin-bottom: 0;
-
-                                    p {
-                                        font-weight: 400;
-                                        font-size: 14px;
-                                        color: #1D1F22;
-                                    }
 
                                     .text_2 {
                                         width: fit-content;
                                         min-width: 24px;
                                         height: 24px;
                                         cursor: default;
-                                        font-weight: 300;
                                     }
                                 }
                             }
@@ -302,6 +289,10 @@ $contentWidth: 1240px;
 
                             .add_decrease_quantity {
                                 margin-right: 8px;
+
+                                .quantity_number {
+                                    @include font ('Raleway', 16px, #1D1F22, 600);
+                                }
                             }
                         }
 
@@ -333,9 +324,7 @@ $contentWidth: 1240px;
 
     h1 {
         margin: 70px 0;
-        color: #1D1F22;
-        font-size: 42px;
-        font-weight: 400;
+        @include font ('Raleway', 42px, #1D1F22, 400);
     }
 
 
@@ -370,10 +359,8 @@ $contentWidth: 1240px;
                 align-items: center;
 
                 .out_of_stock {
+                    @include font ('Raleway', 24px, #8D8F9A, 400);
                     text-decoration: none;
-                    font-weight: 400;
-                    font-size: 24px;
-                    color: #8D8F9A;
                 }
             }
         }
@@ -421,15 +408,11 @@ $contentWidth: 1240px;
                 margin-top: 25px;
 
                 div:nth-child(1) {
-                    font-weight: 300;
-                    font-size: 18px;
-                    color: #1D1F22;
+                    @include font ('Raleway', 18px, #1D1F22, 300);
                 }
 
                 div:nth-child(2) {
-                    font-weight: 500;
-                    font-size: 18px;
-                    color: #1D1F22;
+                    @include font ('Raleway', 18px, #1D1F22, 600);
                     margin-top: 10px;
                 }
             }
@@ -478,28 +461,22 @@ $contentWidth: 1240px;
             }
 
             &_price {
+                @include font ('Roboto Condensed', 18px, #1D1F22, 700);
                 margin-bottom: 10px;
-                font-weight: 700;
-                font-size: 18px;
-                color: #1D1F22;
             }
 
             &_amount {
+                @include font ('Raleway', 24px, #1D1F22, 700);
                 margin-bottom: 20px;
-                font-weight: 700;
-                font-size: 24px;
-                color: #1D1F22;
             }
 
             &_button {
+                @include font ('Raleway', 16px, #FFFFFF, 600);
                 background: #5ECE7B;
                 padding: 16px 32px;
                 user-select: none;
                 border: none;
                 width: 68%;
-                font-weight: 600;
-                font-size: 16px;
-                color: #FFFFFF;
                 cursor: pointer;
             }
 
@@ -508,10 +485,13 @@ $contentWidth: 1240px;
             }
 
             &_description {
+                @include font ('Roboto', 16px, #1D1F22, 400);
                 width: 70%;
-                font-weight: 400;
-                font-size: 16px;
-                color: #1D1F22;
+                line-height: 159.96%;
+
+                h1 {
+                    line-height: 159.96%;
+                }
             }
 
             &_attributes {
@@ -533,9 +513,7 @@ $contentWidth: 1240px;
         width: 100%;
 
         h1 {
-            color: #1D1F22;
-            font-weight: 700;
-            font-size: 32px;
+            @include font ('Raleway', 32px, #1D1F22, 700);
             margin-bottom: 80px;
         }
 
@@ -558,17 +536,10 @@ $contentWidth: 1240px;
 
 
                     .product_info_attributes {
-                        font-weight: 400;
-                        font-size: 14px;
+                        @include font ('Roboto Condensed', 18px, #1D1F22, 700);
 
                         .swatch {
                             margin-bottom: 16px;
-
-                            p {
-                                font-weight: 700;
-                                font-size: 18px;
-                                color: #1D1F22;
-                            }
 
                             .swatch_2 {
                                 cursor: auto;
@@ -577,12 +548,6 @@ $contentWidth: 1240px;
 
                         .text {
                             margin-bottom: 16px;
-
-                            p {
-                                font-weight: 700;
-                                font-size: 18px;
-                                color: #1D1F22;
-                            }
 
                             .text_2 {
                                 width: fit-content;
@@ -609,12 +574,15 @@ $contentWidth: 1240px;
                         .decrease {
                             width: 45px;
                             height: 45px;
-                            font-size: 25px;
-                            font-weight: 400;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            @include font ('Source Sans Pro', 22px, #1D1F22, 400);
+
                         }
 
                         .quantity_number {
-                            font-size: 25px;
+                            @include font ('Raleway', 24px, #1D1F22, 600);
                         }
                     }
 
@@ -629,12 +597,42 @@ $contentWidth: 1240px;
                         position: relative;
                         overflow: hidden;
 
+                        @keyframes animRight {
+                            0% {
+                                transform: translateX(var(--first));
+                            }
+
+                            100% {
+                                transform: translateX(var(--second)); //will be the percentage of the last photo in slider
+                            }
+                        }
+
+                        @keyframes animLeft {
+                            0% {
+                                transform: translateX(90%);
+                            }
+
+                            100% {
+                                transform: translateX(0%);
+                            }
+                        }
+
+                        .animationRight {
+                            animation-name: animRight;
+                            animation-duration: 0.5s;
+                        }
+
+                        .animationLeft {
+                            animation-name: animLeft;
+                            animation-duration: 0.5s;
+                        }
+
                         .photo_slider_2 {
                             display: flex;
                             align-items: center;
                             width: 210px;
                             max-height: 230px;
-                            transition: ease-in-out 0.5s;
+                            transition: ease-in-out 0.4s;
 
                             img {
                                 width: 210px;
@@ -662,9 +660,7 @@ $contentWidth: 1240px;
         }
 
         .product_info_price {
-            font-weight: 700;
-            font-size: 24px;
-            color: #1D1F22;
+            @include font ('Raleway', 24px, #1D1F22, 700);
             margin: 20px 0;
         }
 
@@ -672,44 +668,56 @@ $contentWidth: 1240px;
             text-decoration: none;
         }
 
+        .order_info {
+            margin: 32px 0;
+
+            &_2 {
+                display: flex;
+
+                &_text {
+                    width: fit-content;
+                    @include font ('Raleway', 24px, #1D1F22, 400);
+                }
+
+                &_numbers {
+                    width: fit-content;
+                    @include font ('Raleway', 24px, #1D1F22, 700);
+                    margin-left: 5px;
+                }
+            }
+
+            .button_order {
+                @include font ('Raleway', 16px, #FFFFFF, 600);
+                width: 279px;
+                margin-top: 20px;
+                background: #5ECE7B;
+                padding: 16px 32px;
+                user-select: none;
+                border: none;
+                cursor: pointer;
+            }
+
+            .button_order:hover {
+                filter: brightness(0.9)
+            }
+        }
+
     }
-}
-
-@keyframes rotate {
-    0% {
-        transform: translateX(0%);
-    }
-
-
-    100% {
-        transform: translateX(50%);
-    }
-}
-
-.animation {
-    animation-name: rotate;
-    animation-direction: reverse;
-    animation-duration: 1s;
 }
 
 .product_info_brand {
+    @include font ('Raleway', 30px, #1D1F22, 600);
     margin-bottom: 15px;
-    font-weight: 600;
-    font-size: 30px;
-    color: #1D1F22;
 }
 
 .product_info_name {
-    font-weight: 400;
-    font-size: 30px;
-    color: #1D1F22;
+    @include font ('Raleway', 30px, #1D1F22, 400);
 }
 
+//by default, in differnet sections could be used a little other styles.
 .product_info_attributes {
-
-    font-weight: 700;
-    font-size: 18px;
-    color: #1D1F22;
+    @include font ('Roboto Condensed', 18px, #1D1F22, 700);
+    text-transform: uppercase;
 
     .swatch {
         margin-bottom: 24px;
@@ -750,20 +758,20 @@ $contentWidth: 1240px;
                 width: fit-content;
                 min-width: 63px;
                 height: 45px;
-                border: 1px solid #1D1F22;
                 cursor: pointer;
                 margin-right: 12px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                font-weight: 400;
-                font-size: 16px;
                 margin-top: 8px;
+                border: 1px solid #1D1F22;
+                @include font ('Source Sans Pro', 16px, #1D1F22, 400);
             }
         }
     }
 }
 
+//by default, in differnet sections could be used a little other styles.
 .quantity_and_photo {
     display: flex;
 
@@ -779,9 +787,11 @@ $contentWidth: 1240px;
             width: 24px;
             height: 24px;
             border: 1px solid #1D1F22;
+            cursor: pointer;
             display: flex;
             justify-content: center;
-            cursor: pointer;
+            align-items: center;
+            @include font ('Source Sans Pro', 16px, #1D1F22, 400);
         }
 
         .quantity_number {
@@ -884,6 +894,51 @@ $contentWidth: 1240px;
             a:hover {
                 transform: unset;
             }
+        }
+    }
+}
+
+@media(max-width:500px) {
+
+    .cart_page {
+
+        &_2 {
+
+            .for_scroll {
+
+                .cart_overlay_item {
+                    display: grid;
+                    grid-template-columns: 1fr;
+
+                    .cart_overlay_item_info {
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+
+                    .quantity_and_photo {
+                        display: flex;
+                        justify-content: flex-start;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+
+                }
+            }
+
+            .order_info {
+
+                .order_info_2 {
+                    justify-content: center;
+                }
+
+                .button_order {
+                    display: flex;
+                    justify-content: center;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+            }
+
         }
     }
 }

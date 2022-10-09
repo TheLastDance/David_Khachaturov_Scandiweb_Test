@@ -1,0 +1,47 @@
+@font-face {
+    font-family: 'Raleway';
+    src: url('./fonts/Raleway-Medium.eot');
+    src: url('./fonts/Raleway-Medium.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/Raleway-Medium.woff2') format('woff2'),
+        url('./fonts/Raleway-Medium.woff') format('woff'),
+        url('./fonts/Raleway-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('./fonts/Roboto-Regular.eot');
+    src: url('./fonts/Roboto-Regular.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/Roboto-Regular.woff2') format('woff2'),
+        url('./fonts/Roboto-Regular.woff') format('woff'),
+        url('./fonts/Roboto-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto Condensed';
+    src: url('./fonts/Roboto-Condensed.eot');
+    src: url('./fonts/Roboto-Condensed.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/Roboto-Condensed.woff2') format('woff2'),
+        url('./fonts/Roboto-Condensed.woff') format('woff'),
+        url('./fonts/Roboto-Condensed.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('./fonts/SourceSansPro-Regular.eot');
+    src: url('./fonts/SourceSansPro-Regular.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/SourceSansPro-Regular.woff2') format('woff2'),
+        url('./fonts/SourceSansPro-Regular.woff') format('woff'),
+        url('./fonts/SourceSansPro-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
