@@ -6,6 +6,8 @@ import Navbar from './components/Navbar.jsx'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ItemList from './components/ItemList';
 import ProductsDetails from './components/ProductsDetails';
+import CartPage from './components/CartPage';
+
 
 class App extends PureComponent {
 
@@ -16,6 +18,7 @@ class App extends PureComponent {
         <Navbar/>
         <ItemList/>
         <ProductsDetails/>
+        <CartPage/>
         {/* <button onClick={() => this.props.testReducer()}>Press me</button>
         <p>{this.props.test}</p> */}
       </div>

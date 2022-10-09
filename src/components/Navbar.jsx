@@ -8,6 +8,8 @@ import SelectCurrency from './selectCurrency.jsx';
 import React from 'react';
 import CartOverlay from './CartOverlay.jsx';
 import { connect } from 'react-redux';
+import { changeCurrency } from '../store/mainSlice';
+
 
 
 
@@ -18,18 +20,36 @@ class Navbar extends PureComponent {
         super(props);
         this.state = {
             toggleCart: false,
+            toggleCurrency: false,
         };
         this.box = React.createRef();
     }
+
+    changeCurrency = (symbol) => {
+        this.props.changeCurrency(symbol);
+        this.setState(prev => ({
+            toggleCurrency: !prev.toggleCurrency
+        }));
+    }//this function will change currency and prices of items depending on chosen currency symbol. Currency symbol state from redux will be saved in localstorage 
+
+
+    toggling = () => {
+        this.setState(prev => ({
+            toggleCurrency: !prev.toggleCurrency,
+            toggleCart: false,
+        }));
+    }
+
 
     componentDidMount() {
         document.addEventListener('click', this.handleOutsideClick);
     }
     handleOutsideClick = (event) => {
-        if (this.box && !this.box.current.contains(event.target) && this.state.toggleCart) {
-            this.setState({ toggleCart: false });
+        if (this.box && !this.box.current.contains(event.target) && this.state.toggleCurrency) {
+            this.setState({ toggleCurrency: false });
         }
-    } // this function with ref will detect click outside of our box.(cart toggle)
+    } // this function with ref will detect click outside of our box.(currency switcher)
+
 
     componentDidUpdate(nextProps, nextState) {
         if (nextState.toggleCart !== this.state.toggleCart) {
@@ -58,8 +78,14 @@ class Navbar extends PureComponent {
                             <div className='nav_links'>{category.map((item, index) => <a key={index} href={`/${item.name}`}>{item.name.toUpperCase()}</a>)}</div>
                             <div className='homeLogo'><a href={`/`}><HomeLogo /></a></div>
                             <div className='Currency_CartLogo'>
-                                <SelectCurrency />
-                                <div className='cart' ref={this.box} >
+                                <SelectCurrency
+                                    box={this.box}
+                                    toggling={this.toggling}
+                                    changeCurrency={this.changeCurrency}
+                                    toggleCurrency={this.state.toggleCurrency}
+                                    currencySymbol={this.props.currencySymbol}
+                                />
+                                <div className='cart' >
                                     <CartIcon onClick={() => this.setState(prev => ({ toggleCart: !prev.toggleCart }))} />
                                     {this.props.totalQuantity > 0 && <div className='total_quantity' onClick={() => this.setState(prev => ({ toggleCart: !prev.toggleCart }))}>{this.props.totalQuantity}</div>}
                                     {this.state.toggleCart && <CartOverlay />}
@@ -75,6 +101,10 @@ class Navbar extends PureComponent {
 
 const mapStateToProps = (state) => ({
     totalQuantity: state.redux.totalQuantity,
+    currencySymbol: state.redux.currency,
 });
 
-export default connect(mapStateToProps)(Navbar);
+const mapDispatchToProps = { changeCurrency };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+

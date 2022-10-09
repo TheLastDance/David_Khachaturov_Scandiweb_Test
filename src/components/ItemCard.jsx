@@ -7,6 +7,10 @@ import { ReactComponent as EmptyCart } from '../svg_folder/Empty Cart.svg';
 
 class ItemCard extends PureComponent {
 
+    preventD = (e) => {
+        e.preventDefault();
+    }
+
     render() {
         const moneyFilter = this.props.item.prices.filter(item => item.currency.symbol === this.props.currencySymbol)[0];
         return (
@@ -22,7 +26,7 @@ class ItemCard extends PureComponent {
                         <p>{`${moneyFilter.currency.symbol}${moneyFilter.amount}`}</p>
                     </div>
                 </div>
-                {this.props.item.inStock && <div onClick={(e) => e.preventDefault()} className='item_cart'><div onClick={() => this.props.addToCartFromItemList({ item: this.props.item })}><EmptyCart /></div></div>}
+                {this.props.item.inStock && <div onClick={this.preventD} className='item_cart'><div onClick={() => this.props.addToCartFromItemList({ item: this.props.item })}><EmptyCart /></div></div>}
             </a>
         )
     }

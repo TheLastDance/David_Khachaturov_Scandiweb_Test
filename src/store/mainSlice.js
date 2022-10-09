@@ -8,6 +8,7 @@ const mainSlice = createSlice({
         currency: '$',
         totalQuantity: 0,
         totalPriceAll: 0,
+        deleted: 5,
     },
     reducers: {
         testReducer(state) {
@@ -41,7 +42,7 @@ const mainSlice = createSlice({
                     selectedAttributes,
                     quantity: 1,
                     itemPrice: product.prices.filter(item => item.currency.symbol === state.currency)[0].amount, //filter to push products price in current currency.
-                    totalPrice: product.prices.filter(item => item.currency.symbol === state.currency)[0].amount, //if this product is unique in cart, we need just price of 1 quantity
+                    totalPrice: product.prices.filter(item => item.currency.symbol === state.currency)[0].amount, //if this product is new in cart, we need just price of 1 quantity
                 });
                 state.totalQuantity++;
                 state.totalPriceAll = (Math.round(state.cartList.reduce(function (a, b) { return a + b.totalPrice; }, 0) * 100) / 100).toFixed(2);
@@ -77,6 +78,8 @@ const mainSlice = createSlice({
             const existId = state.cartList.find(item => item.id === product.id && JSON.stringify(item.selectedAttributes) === JSON.stringify(product.selectedAttributes));
 
             if (existId.quantity === 1) {
+                state.deleted = state.cartList.indexOf(existId);//defines index of item which was deleted. Needed for sliders functions in react.
+                state.deletedIndex = 1;
                 state.cartList = state.cartList.slice(0, state.cartList.indexOf(existId)).concat(state.cartList.slice(state.cartList.indexOf(existId) + 1, state.cartList.length));
                 //here I will just copy my cart array without existId product
                 state.totalQuantity--;
