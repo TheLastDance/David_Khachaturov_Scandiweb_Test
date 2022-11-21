@@ -15,7 +15,7 @@ class ItemsInCart extends PureComponent {
 
     //slider functions
     sliderLeft = (item, index) => {
-        let offset = 100; //offset percentage
+        let offset = 210; //offset percentage
         let max = item.gallery.length - 1;
 
         if (this.state.offsetArr[index] > -(max * offset)) {//checks if the last photo in slider was reached
@@ -34,7 +34,7 @@ class ItemsInCart extends PureComponent {
     }
 
     sliderRight = (item, index) => {
-        let offset = 100;
+        let offset = 210;
         let max = item.gallery.length - 1;
 
         if (this.state.offsetArr[index] < 0) {
@@ -44,8 +44,8 @@ class ItemsInCart extends PureComponent {
             document.getElementById(`${index}`).classList.remove('animationLeft');
         } else {
             this.setState(({ offsetArr: [...this.state.offsetArr].map((item2, index2) => index2 === index ? -(max * offset) : item2) }));
-            document.getElementById(`${index}`).style.setProperty('--first', -((max * offset) + 90) + "%");
-            document.getElementById(`${index}`).style.setProperty('--second', -(max * offset) + "%");
+            document.getElementById(`${index}`).style.setProperty('--first', -((max * offset) + 210) + "px");
+            document.getElementById(`${index}`).style.setProperty('--second', -(max * offset) + "px");
             //here I need to change values of the css variables to imitate carousel.
             document.getElementById(`${index}`).classList.remove('animationLeft');
             document.getElementById(`${index}`).classList.add('animationRight');
@@ -115,8 +115,8 @@ class ItemsInCart extends PureComponent {
                             <img src={item.gallery[0]} alt={item.name} />
                         </div>
                         <div className='photo_slider'> {/*display none scss in overlay*/}
-                            <div id={index} className='photo_slider_2' style={{ transform: `translateX(${this.state.offsetArr[index]}%)` }}> {/*here I use my offset state, depending on index*/}
-                                {item.gallery.map((item2, index2) => <img key={index2} src={item2} alt={item.name} />)}
+                            <div id={index} className='photo_slider_2' style={{ transform: `translateX(${this.state.offsetArr[index]}px)` }}> {/*here I use my offset state, depending on index*/}
+                                {item.gallery.map((item2, index2) => <div key={index2}><img src={item2} alt={item.name} /></div>)}
                             </div>
                             {item.gallery.length > 1 && <div className='sliders'>
                                 <SlideLeft onClick={() => this.sliderLeft(item, index)} />

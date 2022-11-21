@@ -27,7 +27,12 @@ class SelectCurrency extends PureComponent {
                             </div>
                         </div>
                         {this.props.toggleCurrency && <div className='drop_down_currencies'>
-                            {currency.map((item, index) => <div className='currencies_list' key={index} onClick={() => this.props.changeCurrency(item.symbol)}> <p>{item.symbol} {item.label}</p> </div>)}
+                            {currency.map((item, index) => <div
+                                className={this.props.currencySymbol === item.symbol ? 'currencies_list currencies_list_choosed' : 'currencies_list'}
+                                key={index}
+                                onClick={() => this.props.changeCurrency(item.symbol)}>
+                                <p>{item.symbol} {item.label}</p>
+                            </div>)}
                             {/* render all avalaible currencies from query */}
                         </div>}
                     </div>

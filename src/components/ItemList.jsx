@@ -37,6 +37,8 @@ class ItemList extends PureComponent {
                         const product = data.category.products;
                         const mainPage = this.state.url === '' || this.state.url === 'all';
 
+                        console.log(product);
+
                         return <div className='item_cards'>
                             {mainPage && product.map((item, index) => <ItemCard key={index} item={item} />)} {/* render all products */}
                             {product.filter(item => item.category === this.state.url).map((item, index) => <ItemCard key={index} item={item} />)}

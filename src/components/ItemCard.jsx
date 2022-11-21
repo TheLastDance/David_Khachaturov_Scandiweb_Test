@@ -15,8 +15,9 @@ class ItemCard extends PureComponent {
         const moneyFilter = this.props.item.prices.filter(item => item.currency.symbol === this.props.currencySymbol)[0];
         // price filter according to chosen currency (which is saved in redux and localstorage)
         return (
-            <a href={this.props.item.id} className={!this.props.item.inStock ? 'item_disabled' : ''}>
-                <div style={{ background: `url(${this.props.item.gallery[0]})` }} className='item_card_photo'>
+            <a href={this.props.item.id} className={!this.props.item.inStock ? 'item_disabled' : null}>
+                <div className='item_card_photo'>
+                    <img className='photo_test' src={this.props.item.gallery[0]} alt="" />
                     {!this.props.item.inStock && <p className='out_of_stock'>OUT OF STOCK</p>}
                 </div>
                 <div className='item_card_info'>
