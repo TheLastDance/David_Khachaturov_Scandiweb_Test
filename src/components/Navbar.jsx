@@ -8,7 +8,7 @@ import React from 'react';
 import CartOverlay from './CartOverlay.jsx';
 import { connect } from 'react-redux';
 import { changeCurrency } from '../store/mainSlice';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 
@@ -103,5 +103,5 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = { changeCurrency };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar));
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
 

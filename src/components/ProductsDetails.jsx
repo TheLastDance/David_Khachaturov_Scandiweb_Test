@@ -10,14 +10,12 @@ class ProductsDetails extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            url: this.props.match.params.id, // current url checker
             mainPhoto: '', // state for big photo of product
             attr: [], // there will be array of selected products attributes (their index)
         };
     }
 
     render() {
-        console.log(this.state.url);
         return (
             <Query query={PRODUCT} variables={{ id: this.props.match.params.id }}>
                 {({ loading, error, data }) => {
@@ -26,7 +24,6 @@ class ProductsDetails extends PureComponent {
 
                     const product = [data.product];
                     console.log(data.product);
-                    console.log(this.props.cartList);
 
                     return <div className='product'>
                         {product.map((item, index) => <div onLoad={() => this.setState({ attr: new Array(item.attributes.length).fill(0) })} key={index} className='product_2'>

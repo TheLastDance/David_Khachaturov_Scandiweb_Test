@@ -69,6 +69,7 @@ class ItemsInCart extends PureComponent {
         console.log(this.props.deletedIndex, this.state.offsetArr)
         return (
             <div className='for_scroll'>
+                {/* maybe will change key part */}
                 {this.props.cartList.map((item, index) => <div key={`${item.id}-${JSON.stringify(item.selectedAttributes)}`} className='cart_overlay_item'>
                     {/* In key I needed to write the value that always would be the same and also unique, to turn off transition of elements, when user will delete item from cart.
                     So I couldn't use index value for that, because when user deletes item from cart index will be changed. And React will think that it's a new element, and will 
