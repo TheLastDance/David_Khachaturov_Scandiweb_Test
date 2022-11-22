@@ -1,7 +1,9 @@
 import { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { addToCartFromItemList } from '../store/mainSlice';
 import { ReactComponent as EmptyCart } from '../svg_folder/Empty Cart.svg';
+
 
 
 //This part of code will render each product in PLP
@@ -15,7 +17,7 @@ class ItemCard extends PureComponent {
         const moneyFilter = this.props.item.prices.filter(item => item.currency.symbol === this.props.currencySymbol)[0];
         // price filter according to chosen currency (which is saved in redux and localstorage)
         return (
-            <a href={this.props.item.id} className={!this.props.item.inStock ? 'item_disabled' : null}>
+            <Link to={`/products/${this.props.item.id}`} className={!this.props.item.inStock ? 'item_disabled' : null}>
                 <div className='item_card_photo'>
                     <img className='photo_test' src={this.props.item.gallery[0]} alt="" />
                     {!this.props.item.inStock && <p className='out_of_stock'>OUT OF STOCK</p>}
@@ -29,7 +31,7 @@ class ItemCard extends PureComponent {
                     </div>
                 </div>
                 {this.props.item.inStock && <div onClick={this.preventD} className='item_cart'><div onClick={() => this.props.addToCartFromItemList({ item: this.props.item })}><EmptyCart /></div></div>}
-            </a>
+            </Link>
         )
     }
 }

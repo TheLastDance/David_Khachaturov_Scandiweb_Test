@@ -1,6 +1,6 @@
 import { PureComponent } from 'react';
 import { Query } from "@apollo/client/react/components";
-import { DETAILED } from '../server/queries';
+import { PRODUCT } from '../server/queries';
 import { connect } from 'react-redux';
 import { addToCartFromDetails } from '../store/mainSlice';
 
@@ -10,25 +10,26 @@ class ProductsDetails extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            url: window.location.pathname.slice(1), // current url checker
+            url: this.props.match.params.id, // current url checker
             mainPhoto: '', // state for big photo of product
             attr: [], // there will be array of selected products attributes (their index)
         };
     }
 
     render() {
+        console.log(this.state.url);
         return (
-            <Query query={DETAILED}>
+            <Query query={PRODUCT} variables={{ id: this.props.match.params.id }}>
                 {({ loading, error, data }) => {
                     if (loading) return null;
                     if (error) return console.log(error);
 
-                    const product = data.category.products;
-                    console.log(this.state.attr);
+                    const product = [data.product];
+                    console.log(data.product);
                     console.log(this.props.cartList);
 
                     return <div className='product'>
-                        {product.map((item, index) => this.state.url === item.id && <div onLoad={() => this.setState({ attr: new Array(item.attributes.length).fill(0) })} key={index} className='product_2'>
+                        {product.map((item, index) => <div onLoad={() => this.setState({ attr: new Array(item.attributes.length).fill(0) })} key={index} className='product_2'>
                             {/* in onLoad function I will create new array with length depending on products attributes quantity, and fill with zeros(because it will be index), I did it 
                             to select first values of attributes by default, it will avoid moment when user will not select all necessary attributes.*/}
                             <div className='all_photos'>
@@ -41,7 +42,7 @@ class ProductsDetails extends PureComponent {
                                 <p className='product_info_brand'>{item.brand}</p>
                                 <p className='product_info_name'>{item.name}</p>
                                 <div className='product_info_attributes'>
-                                    {!item.inStock ? <p style={{ color: 'red' }}>Currently unavailable</p> :
+                                    {!item.inStock ? null :
                                         item.attributes.map((item2, index2) => item2.type === 'swatch' ?
                                             <div className='swatch' key={index2}>
                                                 <p>{`${item2.name}:`}</p>
@@ -75,7 +76,7 @@ class ProductsDetails extends PureComponent {
                                 <p className='product_info_price'>PRICE:</p>
                                 <p className='product_info_amount'>{this.props.currencySymbol}{item.prices.filter(item => item.currency.symbol === this.props.currencySymbol)[0].amount.toFixed(2)}</p>
                                 {item.inStock && <button className='product_info_button' onClick={() => this.props.addToCartFromDetails({ item, attr: this.state.attr })}>ADD TO CART</button>}
-                                <div className='product_info_description' dangerouslySetInnerHTML={{ __html: item.description }}></div>
+                                {item.inStock ? <div className='product_info_description' dangerouslySetInnerHTML={{ __html: item.description }}></div> : null}
                             </div>
                         </div>)}
                     </div>

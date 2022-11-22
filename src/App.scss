@@ -326,6 +326,7 @@ $contentWidth: 1240px;
     h1 {
         margin: 70px 0;
         @include font ('Raleway', 42px, #1D1F22, 400);
+        text-transform: capitalize;
     }
 
 
@@ -443,12 +444,12 @@ $contentWidth: 1240px;
         display: grid;
         grid-template-columns: 1fr 6fr 4fr;
         gap: 40px;
+        margin-top: 70px;
 
         .all_photos {
 
             img {
                 width: 80px;
-
                 cursor: pointer;
             }
         }

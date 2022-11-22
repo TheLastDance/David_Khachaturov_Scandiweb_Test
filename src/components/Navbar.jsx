@@ -8,6 +8,8 @@ import React from 'react';
 import CartOverlay from './CartOverlay.jsx';
 import { connect } from 'react-redux';
 import { changeCurrency } from '../store/mainSlice';
+import { Link, withRouter } from 'react-router-dom';
+
 
 
 //Navbar section
@@ -39,9 +41,10 @@ class Navbar extends PureComponent {
 
     componentDidMount() {
         document.addEventListener('click', this.handleOutsideClick);
+        return document.addEventListener('click', this.handleOutsideClick);
     }
     handleOutsideClick = (event) => {
-        if (this.box && !this.box.current.contains(event.target) && this.state.toggleCurrency) {
+        if ((this.box && !this.box.current.contains(event.target)) && this.state.toggleCurrency) {
             this.setState({ toggleCurrency: false });
         }
     } // this function with ref will detect click outside of our box.(currency switcher)
@@ -69,8 +72,8 @@ class Navbar extends PureComponent {
                         const category = data.categories;
 
                         return <div className='navbar_2'>
-                            <div className='nav_links'>{category.map((item, index) => <a key={index} href={`/${item.name}`}>{item.name.toUpperCase()}</a>)}</div>
-                            <div className='homeLogo'><a href={`/`}><HomeLogo /></a></div>
+                            <div className='nav_links'>{category.map((item, index) => <Link key={index} to={`/category/${item.name}`}>{item.name.toUpperCase()}</Link>)}</div>
+                            <div className='homeLogo'><Link to='/'><HomeLogo /></Link></div>
                             <div className='Currency_CartLogo'>
                                 <SelectCurrency
                                     box={this.box}
@@ -100,5 +103,5 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = { changeCurrency };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar));
 

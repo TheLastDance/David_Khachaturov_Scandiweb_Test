@@ -6,7 +6,7 @@ query MAIN_CATEGORY{
     name
     }   
 }
-`;
+`
 
 export const CURRENCY = gql`
 query currency {
@@ -16,10 +16,38 @@ query currency {
     }	
 }`
 
-export const DETAILED = gql`
-query category {
-    category {
+export const CATEGORY = gql`
+query product($input: CategoryInput) {
+    category(input: $input){
+        name
         products {
+            id
+            brand
+            name
+            inStock
+            gallery
+            attributes {
+                name
+                type
+                items {
+                    displayValue
+                    value
+                    id
+                }
+            }
+            prices {
+                currency {
+                    symbol
+                }
+            amount
+            }
+        }
+    }     
+}`
+
+export const PRODUCT = gql`
+query product($id: String!) {
+    product(id: $id){
             id
             brand
             name
@@ -41,7 +69,7 @@ query category {
             }
             amount
             }
-            description
-        }
-    }
-}`
+            description 
+    }     
+}
+`

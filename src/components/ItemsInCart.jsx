@@ -1,8 +1,10 @@
 import { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { reduceQuantity, removeFromCart } from '../store/mainSlice';
 import { ReactComponent as SlideLeft } from '../svg_folder/slide_left.svg';
 import { ReactComponent as SlideRight } from '../svg_folder/slide_right.svg';
+
 
 //this component will render products in cart page and in cart overlay, some differences between the two will be in scss.
 class ItemsInCart extends PureComponent {
@@ -73,7 +75,7 @@ class ItemsInCart extends PureComponent {
                     re-render it. Stringify is good option there, because, if selected attributes are the same that kind of products will stack in cart. So there it's 100% unique. */}
                     <div className='cart_overlay_item_info'>
                         <p className='product_info_brand'>{item.brand}</p>
-                        <a href={item.id} className='product_info_name'>{item.name}</a>
+                        <Link to={`/products/${item.id}`} className='product_info_name'>{item.name}</Link>
                         <p className='product_info_price'>{this.props.currencySymbol}{item.totalPrice.toFixed(2)}</p> {/*using toFixed here to show pennies after dot like in figma's design*/}
                         <div className='product_info_attributes'>
                             {item.attributes.map((item2, index2) => item2.type === 'swatch' ?

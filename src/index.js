@@ -8,19 +8,22 @@ import store, { persistor } from './store'
 import { ApolloProvider } from '@apollo/client';
 import client from './server/apollo-client';
 import { PersistGate } from 'redux-persist/integration/react';
+import { BrowserRouter } from 'react-router-dom';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <ApolloProvider client={client}>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}> {/* redux persist library to save all redux states in local storage */}
-          <App />
-        </PersistGate>
-      </Provider>
-    </ApolloProvider>
-  </React.StrictMode>
+  <BrowserRouter>
+    <React.StrictMode>
+      <ApolloProvider client={client}>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}> {/* redux persist library to save all redux states in local storage */}
+            <App />
+          </PersistGate>
+        </Provider>
+      </ApolloProvider>
+    </React.StrictMode>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

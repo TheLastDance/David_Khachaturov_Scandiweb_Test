@@ -14,30 +14,28 @@ class CartPage extends PureComponent {
 
     render() {
         return (
-            <>
-                {this.state.url === 'cart' && <div className='cart_page'>
-                    <div className='cart_page_2'>
-                        <h1>CART</h1>
-                        <ItemsInCart />
-                        <div className='order_info'>
-                            <div className='order_info_2'>
-                                <div className='order_info_2_text'>
-                                    <p>Tax 21%:</p>
-                                    <p>Quantity:</p>
-                                    <p>Total:</p>
-                                </div>
-                                <div className='order_info_2_numbers'>
-                                    <p>{this.props.currencySymbol}{(Math.round((Number(this.props.totalPriceAll) * 0.21) * 100) / 100).toFixed(2)}</p>
-                                    {/* here I change type of my props to number, just to avoid bugs where could be strings calculations */}
-                                    <p>{this.props.totalQuantity}</p>
-                                    <p>{this.props.currencySymbol}{this.props.totalPriceAll}</p>
-                                </div>
+            <div className='cart_page'>
+                <div className='cart_page_2'>
+                    <h1>CART</h1>
+                    <ItemsInCart />
+                    <div className='order_info'>
+                        <div className='order_info_2'>
+                            <div className='order_info_2_text'>
+                                <p>Tax 21%:</p>
+                                <p>Quantity:</p>
+                                <p>Total:</p>
                             </div>
-                            <button className='button_order'>ORDER</button>
+                            <div className='order_info_2_numbers'>
+                                <p>{this.props.currencySymbol}{(Math.round((Number(this.props.totalPriceAll) * 0.21) * 100) / 100).toFixed(2)}</p>
+                                {/* here I change type of my props to number, just to avoid bugs where could be strings calculations */}
+                                <p>{this.props.totalQuantity}</p>
+                                <p>{this.props.currencySymbol}{this.props.totalPriceAll}</p>
+                            </div>
                         </div>
+                        <button className='button_order'>ORDER</button>
                     </div>
-                </div >}
-            </>
+                </div>
+            </div >
         )
     }
 }
