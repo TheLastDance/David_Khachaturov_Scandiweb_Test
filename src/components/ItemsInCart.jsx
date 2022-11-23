@@ -119,7 +119,7 @@ class ItemsInCart extends PureComponent {
                         </div>
                         <div className='photo_slider'> {/*display none scss in overlay*/}
                             <div id={index} className='photo_slider_2' style={{ transform: `translateX(${this.state.offsetArr[index]}px)` }}> {/*here I use my offset state, depending on index*/}
-                                {item.gallery.map((item2, index2) => <div key={index2}><img src={item2} alt={item.name} /></div>)}
+                                {item.gallery.map((item2, index2) => <span key={index2}><img src={item2} alt={item.name} /></span>)}
                             </div>
                             {item.gallery.length > 1 && <div className='sliders'>
                                 <SlideLeft onClick={() => this.sliderLeft(item, index)} />

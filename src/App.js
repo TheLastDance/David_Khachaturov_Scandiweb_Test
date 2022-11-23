@@ -12,9 +12,8 @@ class App extends PureComponent {
 
   render() {
     return (
-      <div className="App">
+      <>
         <Navbar />
-        {/* <ProductsDetails /> */}
         <Switch>
           <Route path='/category/:name' render={(props) => <ItemList {...props} />}></Route>
           <Route path='/' exact >
@@ -23,7 +22,7 @@ class App extends PureComponent {
           <Route path='/products/:id' render={(props) => <ProductsDetails {...props} />}></Route>
           <Route path='/cart'><CartPage /></Route>
         </Switch>
-      </div>
+      </>
     )
   }
 }

@@ -3,7 +3,7 @@ import { Query } from "@apollo/client/react/components";
 import { PRODUCT } from '../server/queries';
 import { connect } from 'react-redux';
 import { addToCartFromDetails } from '../store/mainSlice';
-
+import { Interweave } from 'interweave';
 
 //This part of code will make page for PDP
 class ProductsDetails extends PureComponent {
@@ -73,7 +73,7 @@ class ProductsDetails extends PureComponent {
                                 <p className='product_info_price'>PRICE:</p>
                                 <p className='product_info_amount'>{this.props.currencySymbol}{item.prices.filter(item => item.currency.symbol === this.props.currencySymbol)[0].amount.toFixed(2)}</p>
                                 {item.inStock && <button className='product_info_button' onClick={() => this.props.addToCartFromDetails({ item, attr: this.state.attr })}>ADD TO CART</button>}
-                                {item.inStock ? <div className='product_info_description' dangerouslySetInnerHTML={{ __html: item.description }}></div> : null}
+                                {item.inStock ? <div className='product_info_description'><Interweave content={item.description} /></div> : null}
                             </div>
                         </div>)}
                     </div>

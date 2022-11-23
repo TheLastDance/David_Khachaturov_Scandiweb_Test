@@ -634,7 +634,7 @@ $contentWidth: 1240px;
                             }
 
                             100% {
-                                transform: translateX(0%);
+                                transform: translateX(0px);
                             }
                         }
 
@@ -652,7 +652,7 @@ $contentWidth: 1240px;
                             transition: ease-in-out 0.4s;
                             display: flex;
 
-                            div {
+                            span {
                                 width: 210px;
                                 height: 230px;
                                 display: flex;

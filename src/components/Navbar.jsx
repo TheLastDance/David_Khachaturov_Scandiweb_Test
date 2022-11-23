@@ -21,6 +21,7 @@ class Navbar extends PureComponent {
             toggleCurrency: false,
         };
         this.box = React.createRef(); //for outside click
+        this.boxMiniCart = React.createRef(); //for outside click MiniCart
     }
 
     changeCurrency = (symbol) => {
@@ -33,21 +34,31 @@ class Navbar extends PureComponent {
 
     toggling = () => {
         this.setState(prev => ({
-            toggleCurrency: !prev.toggleCurrency,
-            toggleCart: false,
+            toggleCurrency: !prev.toggleCurrency
         }));
-    } //will toggle currency menu and close cart overlay if we clicked on currency menu
-
+    } //will toggle currency menu
 
     componentDidMount() {
-        document.addEventListener('click', this.handleOutsideClick);
-        return document.addEventListener('click', this.handleOutsideClick);
+        document.addEventListener('mousedown', this.outsideClickCurrency);
+        document.addEventListener('mousedown', this.outsideClickCart);
     }
-    handleOutsideClick = (event) => {
+
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.outsideClickCurrency);
+        document.removeEventListener('mousedown', this.outsideClickCart);
+    }
+
+    outsideClickCurrency = (event) => {
         if ((this.box && !this.box.current.contains(event.target)) && this.state.toggleCurrency) {
             this.setState({ toggleCurrency: false });
         }
     } // this function with ref will detect click outside of our box.(currency switcher)
+
+    outsideClickCart = (event) => {
+        if ((this.boxMiniCart.current && !this.boxMiniCart.current.contains(event.target)) && this.state.toggleCart) {
+            this.setState({ toggleCart: false });
+        }
+    } // this function with ref will detect click outside of our box.(cart toggle)
 
 
     componentDidUpdate(nextProps, nextState) {
@@ -62,6 +73,7 @@ class Navbar extends PureComponent {
     }// grey body color on cart click
 
     render() {
+        console.log(this.state.toggleCurrency, this.state.toggleCart);
         return (
             <nav id='navbar' className='navbar'>
                 <Query query={MAIN_CATEGORY}>
@@ -82,7 +94,7 @@ class Navbar extends PureComponent {
                                     toggleCurrency={this.state.toggleCurrency}
                                     currencySymbol={this.props.currencySymbol}
                                 />
-                                <div className='cart' >
+                                <div className='cart' ref={this.boxMiniCart}>
                                     <CartIcon onClick={() => this.setState(prev => ({ toggleCart: !prev.toggleCart }))} />
                                     {this.props.totalQuantity > 0 && <div className='total_quantity' onClick={() => this.setState(prev => ({ toggleCart: !prev.toggleCart }))}>{this.props.totalQuantity}</div>}
                                     {this.state.toggleCart && <CartOverlay />}
