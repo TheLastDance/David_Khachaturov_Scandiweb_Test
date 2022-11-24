@@ -75,7 +75,6 @@ class ItemsInCart extends PureComponent {
                     <div className='cart_overlay_item_info'>
                         <p className='product_info_brand'>{item.brand}</p>
                         <Link to={`/products/${item.id}`} className='product_info_name'>{item.name}</Link>
-                        {/* maybe will change 80 line */}
                         <p className='product_info_price'>{this.props.currencySymbol}{item.itemPrice.toFixed(2)}</p> {/*using toFixed here to show pennies after dot like in figma's design*/}
                         <div className='product_info_attributes'>
                             {item.attributes.map((item2, index2) => item2.type === 'swatch' ?
