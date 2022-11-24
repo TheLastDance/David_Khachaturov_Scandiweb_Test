@@ -26,6 +26,7 @@ query product($input: CategoryInput) {
             name
             inStock
             gallery
+            category
             attributes {
                 name
                 type

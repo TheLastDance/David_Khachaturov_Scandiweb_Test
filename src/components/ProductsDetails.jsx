@@ -22,18 +22,18 @@ class ProductsDetails extends PureComponent {
                     if (loading) return null;
                     if (error) return console.log(error);
 
-                    const product = [data.product];
-                    console.log(data.product);
+                    const product = [data.product]; // I could use there data without array, because I will have here only one product which was requested, but I decided
+                    //to put the data inside array just to leave my code as it was and avoid some unnecessary bugs.
 
                     return <div className='product'>
                         {product.map((item, index) => <div onLoad={() => this.setState({ attr: new Array(item.attributes.length).fill(0) })} key={index} className='product_2'>
                             {/* in onLoad function I will create new array with length depending on products attributes quantity, and fill with zeros(because it will be index), I did it 
                             to select first values of attributes by default, it will avoid moment when user will not select all necessary attributes.*/}
                             <div className='all_photos'>
-                                {item.gallery.map((item2, index2) => <img key={index2} src={item2} alt={item.id} onMouseOver={() => this.setState({ mainPhoto: item2 })} />)}
+                                {item.gallery.map((item2, index2) => <img key={index2} src={item2} alt={item.name} onMouseOver={() => this.setState({ mainPhoto: item2 })} />)}
                             </div>
                             <div className='main_photo'>
-                                <img src={this.state.mainPhoto === '' ? item.gallery[0] : this.state.mainPhoto} alt={item.id} />
+                                <img src={this.state.mainPhoto === '' ? item.gallery[0] : this.state.mainPhoto} alt={item.name} />
                             </div>
                             <div className='product_info'>
                                 <p className='product_info_brand'>{item.brand}</p>
@@ -45,10 +45,10 @@ class ProductsDetails extends PureComponent {
                                                 <p>{`${item2.name}:`}</p>
                                                 <div>{item2.items.map((item3, index3) => <div
                                                     onClick={() => this.setState({ attr: [...this.state.attr].map((item4, index4) => index4 === index2 ? index3 : item4) })}
-                                                    className='swatch_2'
+                                                    className={index3 === this.state.attr[index2] ? 'swatch_2 swatch_2_selected' : 'swatch_2'}
                                                     title={item3.displayValue}
-                                                    key={index3}
-                                                    style={index3 === this.state.attr[index2] ? { border: '1px solid #5ECE7B' } : {}}> <div style={{ background: item3.value, border: '1px solid grey' }}></div> </div>)}
+                                                    key={index3}>
+                                                    <div style={{ background: item3.value }}></div> </div>)}
                                                 </div>
                                                 {/* It's not in figma's design, but it's necessary to add grey border around colors, because you have option to select white color and it's the same with our body color, so user won't see it */}
                                             </div> :
@@ -56,10 +56,11 @@ class ProductsDetails extends PureComponent {
                                                 <p>{`${item2.name}:`}</p>
                                                 <div>{item2.items.map((item3, index3) => <div
                                                     onClick={() => this.setState({ attr: [...this.state.attr].map((item4, index4) => index4 === index2 ? index3 : item4) })}
-                                                    className='text_2'
+                                                    className={index3 === this.state.attr[index2] ? 'text_2 text_2_selected' : 'text_2'}
                                                     title={item3.displayValue}
-                                                    key={index3}
-                                                    style={index3 === this.state.attr[index2] ? { background: '#1D1F22', color: 'white' } : { background: 'white', color: '#1D1F22' }}>{item3.value}</div>)}
+                                                    key={index3}>
+                                                    {item3.value}
+                                                </div>)}
                                                     {/* here I render styles according on selected attributes, so if I clicked on attribute it will change style also */}
                                                 </div>
                                             </div>

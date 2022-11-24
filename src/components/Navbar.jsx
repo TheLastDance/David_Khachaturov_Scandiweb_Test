@@ -32,11 +32,17 @@ class Navbar extends PureComponent {
     } //this function will change currency and prices of items depending on chosen currency symbol. Currency symbol state from redux will be saved in localstorage 
 
 
-    toggling = () => {
+    togglingCurrency = () => {
         this.setState(prev => ({
             toggleCurrency: !prev.toggleCurrency
         }));
     } //will toggle currency menu
+
+    togglingCart = () => {
+        this.setState(prev => ({
+            toggleCart: !prev.toggleCart
+        }));
+    } //will toggle cart menu (need this for click on view bag button, after this click cart should be closed)
 
     componentDidMount() {
         document.addEventListener('mousedown', this.outsideClickCurrency);
@@ -73,7 +79,6 @@ class Navbar extends PureComponent {
     }// grey body color on cart click
 
     render() {
-        console.log(this.state.toggleCurrency, this.state.toggleCart);
         return (
             <nav id='navbar' className='navbar'>
                 <Query query={MAIN_CATEGORY}>
@@ -89,7 +94,7 @@ class Navbar extends PureComponent {
                             <div className='Currency_CartLogo'>
                                 <SelectCurrency
                                     box={this.box}
-                                    toggling={this.toggling}
+                                    toggling={this.togglingCurrency}
                                     changeCurrency={this.changeCurrency}
                                     toggleCurrency={this.state.toggleCurrency}
                                     currencySymbol={this.props.currencySymbol}
@@ -97,7 +102,7 @@ class Navbar extends PureComponent {
                                 <div className='cart' ref={this.boxMiniCart}>
                                     <CartIcon onClick={() => this.setState(prev => ({ toggleCart: !prev.toggleCart }))} />
                                     {this.props.totalQuantity > 0 && <div className='total_quantity' onClick={() => this.setState(prev => ({ toggleCart: !prev.toggleCart }))}>{this.props.totalQuantity}</div>}
-                                    {this.state.toggleCart && <CartOverlay />}
+                                    {this.state.toggleCart && <CartOverlay toggling={this.togglingCart} />}
                                 </div>
                             </div>
                         </div>

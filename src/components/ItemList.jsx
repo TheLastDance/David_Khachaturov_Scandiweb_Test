@@ -9,10 +9,11 @@ import ItemCard from './ItemCard';
 class ItemList extends PureComponent {
 
     render() {
-        const exp = this.props.match.params.name || "";
+        //const exp = this.props.match.params.name || ""; // this const could be used in query variable if we want to render all category also at the first page of project.
+        // but because it supposed to be hardcode I selected redirect option in react-router-dom.
         return (
             <div className='item_list'>
-                <Query query={CATEGORY} variables={{ input: { title: exp } }}>
+                <Query query={CATEGORY} variables={{ input: { title: this.props.match.params.name } }}>
                     {({ loading, error, data }) => {
                         if (loading) return null;
                         if (error) return console.log(error);

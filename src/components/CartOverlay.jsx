@@ -18,7 +18,7 @@ class CartOverlay extends PureComponent {
                     <div><p>{this.props.currencySymbol}{this.props.totalPriceAll}</p></div>
                 </div>
                 <div className='cart_buttons'>
-                    <Link to='/cart'>VIEW BAG</Link>
+                    <Link to='/cart' onClick={this.props.toggling}>VIEW BAG</Link>
                     <button>CHECK OUT</button>
                 </div>
             </div >

@@ -66,10 +66,8 @@ class ItemsInCart extends PureComponent {
 
 
     render() {
-        console.log(this.props.deletedIndex, this.state.offsetArr)
         return (
             <div className='for_scroll'>
-                {/* maybe will change key part */}
                 {this.props.cartList.map((item, index) => <div key={`${item.id}-${JSON.stringify(item.selectedAttributes)}`} className='cart_overlay_item'>
                     {/* In key I needed to write the value that always would be the same and also unique, to turn off transition of elements, when user will delete item from cart.
                     So I couldn't use index value for that, because when user deletes item from cart index will be changed. And React will think that it's a new element, and will 
@@ -77,16 +75,19 @@ class ItemsInCart extends PureComponent {
                     <div className='cart_overlay_item_info'>
                         <p className='product_info_brand'>{item.brand}</p>
                         <Link to={`/products/${item.id}`} className='product_info_name'>{item.name}</Link>
-                        <p className='product_info_price'>{this.props.currencySymbol}{item.totalPrice.toFixed(2)}</p> {/*using toFixed here to show pennies after dot like in figma's design*/}
+                        {/* maybe will change 80 line */}
+                        <p className='product_info_price'>{this.props.currencySymbol}{item.itemPrice.toFixed(2)}</p> {/*using toFixed here to show pennies after dot like in figma's design*/}
                         <div className='product_info_attributes'>
                             {item.attributes.map((item2, index2) => item2.type === 'swatch' ?
                                 <div className='swatch' key={index2}>
                                     <p>{`${item2.name}:`}</p>
                                     <div>{item2.items.map((item3, index3) => <div
-                                        className='swatch_2'
+                                        className={item.attributes[index2].items[index3].id === item.selectedAttributes[index2].id ? 'swatch_2 swatch_2_selected' : 'swatch_2'}
                                         title={item3.displayValue}
-                                        key={index3}
-                                        style={item.attributes[index2].items[index3].id === item.selectedAttributes[index2].id ? { border: '1px solid #5ECE7B' } : {}}> <div style={{ background: item3.value, border: '1px solid grey' }}></div> </div>)}
+                                        key={index3}>
+                                        <div style={{ background: item3.value }}></div>
+                                        {/* there should be style prop, because we get color from database */}
+                                    </div>)}
                                         {/* here I check attributes id's with the same indexs in attributes, and selecetedAttributes, 
                                         to show the user which attributes he chosed and render style according on it, if id's are same it means that we found users selected attribute and so on. */}
                                     </div>
@@ -94,11 +95,11 @@ class ItemsInCart extends PureComponent {
                                 <div className='text' key={index2}>
                                     <p>{`${item2.name}:`}</p>
                                     <div>{item2.items.map((item3, index3) => <div
-                                        className='text_2'
+                                        className={item.attributes[index2].items[index3].id === item.selectedAttributes[index2].id ? 'text_2 text_2_selected' : 'text_2'}
                                         title={item3.displayValue}
-                                        key={index3}
-                                        style={item.attributes[index2].items[index3].id === item.selectedAttributes[index2].id ? { background: '#1D1F22', color: 'white' } : { background: 'white', color: '#1D1F22' }}
-                                    >{item3.value}</div>)}
+                                        key={index3}>
+                                        {item3.value}
+                                    </div>)}
                                     </div>
                                 </div>
                             )}
@@ -118,7 +119,8 @@ class ItemsInCart extends PureComponent {
                             <img src={item.gallery[0]} alt={item.name} />
                         </div>
                         <div className='photo_slider'> {/*display none scss in overlay*/}
-                            <div id={index} className='photo_slider_2' style={{ transform: `translateX(${this.state.offsetArr[index]}px)` }}> {/*here I use my offset state, depending on index*/}
+                            <div id={index} className='photo_slider_2' style={{ transform: `translateX(${this.state.offsetArr[index]}px)` }}>
+                                {/*here I use my offset state, depending on index. I also should use style prop here, because it won't be static*/}
                                 {item.gallery.map((item2, index2) => <span key={index2}><img src={item2} alt={item.name} /></span>)}
                             </div>
                             {item.gallery.length > 1 && <div className='sliders'>

@@ -19,7 +19,7 @@ class ItemCard extends PureComponent {
         return (
             <Link to={`/products/${this.props.item.id}`} className={!this.props.item.inStock ? 'item_disabled' : null}>
                 <div className='item_card_photo'>
-                    <img className='photo_test' src={this.props.item.gallery[0]} alt="" />
+                    <img className='photo_2' src={this.props.item.gallery[0]} alt={this.props.item.name} />
                     {!this.props.item.inStock && <p className='out_of_stock'>OUT OF STOCK</p>}
                 </div>
                 <div className='item_card_info'>

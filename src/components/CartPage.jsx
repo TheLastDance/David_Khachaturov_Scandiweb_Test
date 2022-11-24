@@ -5,12 +5,6 @@ import ItemsInCart from './ItemsInCart';
 
 //Cart page section
 class CartPage extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            url: window.location.pathname.slice(1), //current pathname
-        };
-    }
 
     render() {
         return (
